@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone') {
+            steps {
+                // Cloner le repository depuis Git
+                git 'https://github.com/Noussaiba-Zaoui/JenkingsHelloWorld'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Compilation du projet Java
+                sh 'javac MonProgramme.java'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Exécution des tests unitaires (ajoutez votre commande de test ici)
+                sh 'java -cp . org.junit.runner.JUnitCore MonProgrammeTest'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Ajouter vos étapes de déploiement ici, si nécessaire
+                echo 'Déploiement effectué'
+            }
+        }
+    }
+}
